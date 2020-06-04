@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="Mage2Kata\DiConfig\Model\Config\UnitConversion\Virtual" type="Magento\Framework\Config\Data">
+        <arguments>
+            <argument name="cacheId" xsi:type="string">mage2kata_unitconversion_map_config</argument>
+            <argument name="reader" xsi:type="object">Mage2Kata\DiConfig\Model\Config\UnitConversion\Reader\Virtual</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Mage2Kata\DiConfig\Model\Config\UnitConversion\Reader\Virtual" type="Magento\Framework\Config\Reader\Filesystem">
+        <arguments>
+            <argument name="fileName" xsi:type="string">unit_conversion.xml</argument>
+            <argument name="schemaLocator" xsi:type="object">Mage2Kata\DiConfig\Model\Config\UnitConversion\SchemaLocator\Virtual</argument>
+            <argument name="converter" xsi:type="object">Mage2Kata\DiConfig\Model\Config\UnitConversionConfigConverter</argument>
+            <argument name="idAttributes" xsi:type="array">
+                <item name="/conversion_map/unit" xsi:type="string">id</item>
+                <item name="/conversion_map/unit/conversion" xsi:type="string">to</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Mage2Kata\DiConfig\Model\Config\UnitConversion\SchemaLocator\Virtual" type="Magento\Framework\Config\GenericSchemaLocator">
+        <arguments>
+            <argument name="moduleName" xsi:type="string">Mage2Kata_DiConfig</argument>
+            <argument name="schema" xsi:type="string">unit_conversion.xsd</argument>
+        </arguments>
+    </virtualType>
+</config>
